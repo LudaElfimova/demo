@@ -3,19 +3,19 @@ package com.netcracker.unc.cms.services;
 
 import com.netcracker.unc.cms.models.Post;
 import com.netcracker.unc.cms.repositories.PostRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
-@Primary
 public class PostServiceJpaImpl implements PostService {
 
-    @Autowired
-    private PostRepository postRepo;
+    private final PostRepository postRepo;
+
+    public PostServiceJpaImpl(PostRepository postRepo) {
+        this.postRepo = Objects.requireNonNull(postRepo);
+    }
 
     @Override
     public List<Post> findAll() {
